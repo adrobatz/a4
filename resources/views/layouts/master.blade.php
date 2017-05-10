@@ -5,22 +5,20 @@
     <title>
         My Wedding Website
     </title>
-
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
     <link href="/css/style.css" type='text/css' rel='stylesheet'> 
 
     @stack('head')
 </head>
 
 <header>
-	<h1>Jane &amp; Joe</h1>
+	<h1>Our Wedding</h1>
 <nav>
 	
 <ul>
-	<li>About Us</li>
-	<li><a href="/rsvp">RSVP</a></li>
-	<li>Details</li>
-	<li>Registry</li>
-	<li>Photos</li>
+	<li><a href="/rsvp">For Guests</a></li>
+	<li><a href="/allrsvps">For the Bride &amp; Groom</a></li>
 </ul>
 
 </nav>
@@ -28,6 +26,11 @@
 </header>
 
 <body>
+
+
+    @if(Session::get('message') != null)
+    <div class='message'>{{ Session::get('message') }}</div>
+    @endif
     <section>
         @yield('content')
     </section>

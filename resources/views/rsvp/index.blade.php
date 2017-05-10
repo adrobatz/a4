@@ -2,13 +2,7 @@
 
 @section('content')
 
-<h1>Thanks for responding!</h1>
-
-<h2>We're excited to see you!</h2>
-
-
-<h2>Your RSVP:</h2>
-
+<h1>RSVPs</h1>
 
 @foreach($rsvps as $rsvp)
 <div class="rsvp">
@@ -16,6 +10,7 @@
 <p>{{$rsvp['email']}}</p>
 <p>{{$rsvp['address']}}</p>
 <p>{{$rsvp['attending']}}</p>
+<p>{{$rsvp['guest']}}</p>
 <p>{{$rsvp['meal']}}</p>
 </div>
 @endforeach

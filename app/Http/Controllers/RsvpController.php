@@ -4,115 +4,91 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rsvp;
+use Session;
 class RsvpController extends Controller
 {
     //
 
-
-     public function submitRsvp(Request $request) {
-
-
-//delete
-
-        $rsvp = Rsvp::find(2);
-
-        if(!$rsvp){
-            dump ('not deleted');
-        } else {
-            $rsvp->delete();
-            dump('deleted');
-        }
-
-//update row
-
-        // $rsvp = Rsvp::where('attending', 'LIKE', 'yes')->first();
-
-        // $rsvp->attending = 'no';
-
-        // $rsvp->save();
-
-        // dump("update complete");
-
-
-
-//show specific list aka filtering
-
-        // $rsvp = new Rsvp();
-        // $rsvps = $rsvp->where('attending', 'LIKE', 'yes')->get();
-        // dump($rsvps->toArray());
-
-//show all rows
-        // $rsvp = new Rsvp();
-        // $rsvps = $rsvp->all();
-        // dump($rsvps->toArray());
-
-
-
-// ADD RSVP TO THE LSIT
-        // $newRsvp = new Rsvp();
-
-        // $newRsvp->name = "Jane Doe";
-        // $newRsvp->address =  "123 Main St., Anytown USA";
-        // $newRsvp->email = "janedoe@gmail.com";
-        // $newRsvp->attending = "yes";
-        // $newRsvp->guest = "no";
-        // $newRsvp->meal = "fish";
-
-        // $newRsvp->save();
-
-        // dump($newRsvp->toArray());
-
-   
-	return view('rsvp.submitRsvp');
-    # 
-    #
-    # [...Code will eventually go here to actually save this book to a database...]
-    #
-    #
-
-    # Redirect the user to the page to view the book
-}
-
-        // # guest meal choice
-        // # this is required
-
+    public function index() {
+        $rsvps = Rsvp::all();
+        return view('rsvp.index')->with([
+            'rsvps' => $rsvps,
+            ]); 
     
-       
-
-     	
 
 
+    }
 
+
+/* Submit form with RSVP information */
+
+
+    public function submitRsvp(Request $request) {
+ 
+	    return view('rsvp.submitRsvp');
+
+    }
 
 /**
-* POST
-* /books/new
-* Process the form for adding a new book
+* Process form and save new rsvp to the database 
 */
 public function showRsvp(Request $request) {
 
-$meal = $request->input('meal', null);
- if ($meal){
-            if(isset($_POST['meal'])) {
-                if($_POST['meal'] == 'fish') {
-                    $meal = 'fish';
-                } elseif($_POST['meal'] == 'meat') {
-                    $meal = 'meat';
-                } else {
-                    $meal = 'vegetarian';
-                }
-            }
 
-            # check off to earn an extra 50 points
-            if ($request->has('guest')) {
-	           $guestCount = 'guest';
-            } else {
-	           $guestCount = 'no guest';
-            }
-dump($meal);
-return view('rsvp.showRsvp');
+            $rsvp = new Rsvp();
+            $rsvp->name = $request->name;
+            $rsvp->email = $request->email;
+            $rsvp->address = $request->address;
+            $rsvp->attending = $request->attending;
+            $rsvp->guest = $request->guest;
+            $rsvp->meal = $request->meal;
+            $rsvp->save();
+
+return redirect('/yourrsvp');
+}
+
+public function yourRsvp() {
+    $rsvps = Rsvp::orderBy('id', 'desc')->limit(1)->get();
+    return view('rsvp.yourRsvp')->with([
+            'rsvps' => $rsvps,
+            ]);
+}
+
+public function edit($id) {
+
+    $rsvp = Rsvp::find($id);
+
+    if(is_null($rsvp)) {
+        Session::flash('message', 'Looks like you havent RSVPd yet! How about you do that now?');
+        return redirect('/rsvp');
+    }
+
+    return view('rsvp.edit')->with([
+        'id' => $id,
+        'rsvp' => $rsvp
+    ]);
+        
 
 }
 
+public function saveEdits(Request $request) {
+
+    $rsvp = Rsvp::find($request->id);
+    $rsvp->name = $request->name;
+    $rsvp->email = $request->email;
+    $rsvp->address = $request->address;
+    $rsvp->attending = $request->attending;
+    $rsvp->guest = $request->guest;
+    $rsvp->meal = $request->meal;
+    $rsvp->save();
+
+    Session::flash('message', 'thanks for updating!');
+    return redirect('/rsvp/edit/'.$request->id);
+
 }
+
+
+
+
+
 }
