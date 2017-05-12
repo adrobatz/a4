@@ -15,7 +15,7 @@
     <nav>
         <ul>
             <li><a href="/rsvp">For Guests</a></li>
-            <li><a href="/allrsvps">For the Bride &amp; Groom</a></li>
+            <li><a href="/allrsvps">For the Couple</a></li>
         </ul>
     </nav>
 </header>
