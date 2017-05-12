@@ -8,6 +8,7 @@
     <link href="/css/style.css" type='text/css' rel='stylesheet'> 
     @stack('head')
 </head>
+<body>
 
 <header>
     <h1>Our Wedding</h1>
@@ -18,8 +19,6 @@
         </ul>
     </nav>
 </header>
-
-<body>
 
     @if(Session::get('message') != null)
         <div class='message'>{{ Session::get('message') }}</div>
