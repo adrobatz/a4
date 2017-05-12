@@ -12,5 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call(RsvpsTableSeeder::class);
+         $this->call(TagsTableSeeder::class);
+         $this->call(RsvpTagTableSeeder::class);
     }
 }

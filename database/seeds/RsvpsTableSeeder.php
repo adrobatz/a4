@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Rsvp;
+
 class RsvpsTableSeeder extends Seeder
 {
     /**

@@ -17,31 +17,39 @@
         <input type="text" name="address" id="address" value='{{ old('address', $rsvp->address)}}'><br/>
 </div>
 <div class="guestInfo">
-        <label>Will you be attending?</label>
+        <label>*Will you be attending?</label>
         <ul>
-            <li><input type="radio" name="attending" value='accept' >accept</li>
+            <li><input type="radio" name="attending" value='accept'>accept</li>
             <li><input type="radio" name="attending" value='regret'>regret</li>
         </ul>
     </div>
     <div class="guestInfo">
-        <label>Will you be bringing a plus one?</label>
+        <label>*Will you be bringing a guest?</label>
         <ul>
-            <li><input type="radio" name="guest" value="yes">yes</li>
-            <li><input type="radio" name="guest" value="no">no</li>
+            <li><input type="radio" name="guest" value="yes" >yes</li>
+            <li><input type="radio" name="guest" value=no>no</li>
         </ul>
     </div>
     <div class="guestInfo">
-    <label>Please select a meal:</label>
-        <ul>
-            <li><input type="radio" name="meal" value="none">none</li>
-            <li><input type="radio" name="meal" value="fish">fish</li>
-            <li><input type="radio" name="meal" value="meat">meat</li>
-            <li><input type="radio" name="meal" value="vegetarian">vegetarian</li>
-        </ul>
+    <label>*Please select a meal:</label>
+    <ul>
+        <li><input type='radio' value='none' name='meal'>None</li>
+        <li><input type='radio' value='fish' name='meal'>Fish</li>
+        <li><input type='radio' value='meat' name='meal'>Meat</li>
+        <li><input type='radio' value='vegetarian' name='meal'>Vegetarian</li>
+    </ul>
     </div>
-    <input class="button" type="submit" name="button" value="edit rsvp">
-    <div class="guestInfo">
-    </form>
+<div class="guestInfo">
 
+</div>
+    <input class="button" type="submit" name="button" value="edit rsvp">
+    </form>
+@if(count($errors) > 0)
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
 
 @endsection
