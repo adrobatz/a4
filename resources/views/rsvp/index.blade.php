@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h1>List of RSVPs</h1>
+	<h2>List of RSVPs</h2>
 
 	@foreach($rsvps as $rsvp)
 		<h2>Guest Name: {{$rsvp['name']}}</h2>

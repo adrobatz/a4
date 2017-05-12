@@ -2,11 +2,11 @@
 
 @section('content')
 
-	<h1>Thanks for responding!</h1>
+	<h2>Thanks for responding!</h2>
 
 	<h2>We're excited to see you!</h2>
 
-	<h1>Your Rsvp:</h1>
+	<h2>Your Rsvp:</h2>
 
 	@foreach($rsvps as $rsvp)
 		<div class="rsvp">

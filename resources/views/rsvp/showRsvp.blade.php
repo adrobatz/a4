@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h1>Thanks for responding!</h1>
+	<h2>Thanks for responding!</h2>
 
 	<h2>We're excited to see you!</h2>
 

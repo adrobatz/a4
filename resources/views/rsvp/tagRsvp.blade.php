@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h1>List of RSVPs</h1>
+	<h2>List of RSVPs</h2>
 
 	<form method='POST' action='/rsvp/tag'>
 	{{ csrf_field() }}
