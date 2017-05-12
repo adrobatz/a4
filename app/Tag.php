@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     public function rsvps() {
-    return $this->belongsToMany('App\Rsvp')->withTimestamps();
+        return $this->belongsToMany('App\Rsvp')->withTimestamps();
 }
 
 
@@ -18,5 +18,5 @@ class Tag extends Model
             $tagsForCheckboxes[$tag['id']] = $tag->name;
         }
         return $tagsForCheckboxes;
-    }
+        }
 }

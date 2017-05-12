@@ -36,7 +36,7 @@ Show list of all Rsvps
 /* Submit form with RSVP information */
     public function submitRsvp(Request $request) {
  
-	    return view('rsvp.submitRsvp');
+        return view('rsvp.submitRsvp');
 
     }
 
@@ -131,56 +131,58 @@ Save edits made to the Rsvp
 
     }
 
-/* tag RVSP with guest info */
-public function tagRsvp($id) {
+/* 
+tag RVSP with guest info 
+*/
+    public function tagRsvp($id) {
 
-            $rsvp = Rsvp::find($id);
-            $tagsForCheckboxes = Tag::getTagsForCheckboxes();
+        $rsvp = Rsvp::find($id);
+        $tagsForCheckboxes = Tag::getTagsForCheckboxes();
 
 
 
-            return view('rsvp.tagRsvp')->with([
-            'id' => $id,
-            'rsvp' => $rsvp,
-            'tagsForCheckboxes' => $tagsForCheckboxes,
+        return view('rsvp.tagRsvp')->with([
+        'id' => $id,
+        'rsvp' => $rsvp,
+        'tagsForCheckboxes' => $tagsForCheckboxes,
         ]);
 }
 
-/* save the new tag information and add it to the relevant RSVP*/
-public function saveTag(Request $request) {
+/* 
+save the new tag information and add it to the relevant RSVP
+*/
+    public function saveTag(Request $request) {
     
-    $rsvp = Rsvp::find($request->id);
-    $tags = ($request->tags) ?: [];
+        $rsvp = Rsvp::find($request->id);
+        $tags = ($request->tags) ?: [];
         $rsvp->tags()->sync($tags);
         $rsvp->save();
 
-
-
-Session::flash('message', 'guest has been updated');
+        Session::flash('message', 'guest has been updated');
         return redirect('/allrsvps');
 
-}
-
-public function deleteRsvp($id) {
-                $rsvp = Rsvp::find($id);
-
-
-
-            return view('rsvp.delete')->with([
+    }
+/*
+delete RSVP
+*/
+    public function deleteRsvp($id) {
+        $rsvp = Rsvp::find($id);
+        
+        return view('rsvp.delete')->with([
             'id' => $id,
             'rsvp' => $rsvp,
         ]);
-    return view ('rsvp.delete');
-
 }
-
-public function confirmDeleteRsvp(Request $request) {
-    $rsvp = Rsvp::find($request->id);
-    $rsvp->tags()->detach();
-    $rsvp->delete();
+/* 
+confirm deletion
+*/
+    public function confirmDeleteRsvp(Request $request) {
+        $rsvp = Rsvp::find($request->id);
+        $rsvp->tags()->detach();
+        $rsvp->delete();
     
-    Session::flash('message', 'rsvp deleted');
+        Session::flash('message', 'rsvp deleted');
         return redirect('/allrsvps');
 
-}
+    }
 }

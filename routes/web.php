@@ -16,23 +16,18 @@ Route::get('/', function () {
 });
 
 /* 
-Bride Routes 
+Bride and Groom Routes 
 */
 
 /* Route to show list of Rsvps*/
 Route::get('/allrsvps/', 'RsvpController@index');
-
+/*Route to add tags to rsvp*/
 Route::get('/rsvp/tag/{id}', 'RsvpController@tagRsvp');
+/*Route to save tags  */
 Route::post('/rsvp/tag/', 'RsvpController@saveTag');
-
-/*Route to add tags to rsvp*/
-Route::get('/rsvp/tags/{id}', 'RsvpController@addTags');
-/*Route to save tags  */
-Route::post('/rsvp/tags/', 'RsvpController@saveTags');
-
-/*Route to add tags to rsvp*/
+/*Route to delete rsvp*/
 Route::get('/rsvp/delete/{id}', 'RsvpController@deleteRsvp');
-/*Route to save tags  */
+/*Route to submit deletion  */
 Route::post('/rsvp/delete/', 'RsvpController@confirmDeleteRsvp');
 
 /* 
@@ -48,8 +43,6 @@ Route::get('/yourrsvp', 'RsvpController@yourRsvp');
 
 /*Route to edit rsvp*/
 Route::get('/rsvp/edit/{id}', 'RsvpController@edit');
-\/*Route to save edited Rsvp */
+/*Route to save edited Rsvp */
 Route::post('/rsvp/edit/', 'RsvpController@saveEdits');
-
-
 
